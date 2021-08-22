@@ -1,0 +1,15 @@
+{
+  "name": "framework-arduinoststm32-maple",
+  "version": "99.99.99",
+  "description": "Arduino Wiring-based Framework for ST STM32 microcontrollers (Maple Core)",
+  "keywords": [
+    "framework",
+    "arduino",
+    "stmicroelectronics",
+    "stm32"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogerclarkmelbourne/Arduino_STM32"
+  }
+}
