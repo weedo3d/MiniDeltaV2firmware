@@ -43,6 +43,7 @@
 
 #include "../../MarlinCore.h" // for startOrResumeJob
 
+// perron include
 #include "../../wtlib/WTCMD.h"
 
 /**
@@ -69,6 +70,7 @@ void GcodeSuite::M24() {
       recovery.prepare();
     #endif
 
+    // perron 
 	wt_machineStatus = WS_PRINTING;
 
 	wtgl.GotoPrintingMenu();
@@ -89,41 +91,45 @@ void GcodeSuite::M24() {
 /**
  * M25: Pause SD Print
  */
-void GcodeSuite::M25() {
+void GcodeSuite::M25()
+{
+  wt_sdcard_pause();
 
-  #if ENABLED(SDSUPPORT)
-    if (IS_SD_PRINTING()) card.pauseSDPrint();
-  #endif
+// #if ENABLED(SDSUPPORT)
+//   if (IS_SD_PRINTING())
+//     card.pauseSDPrint();
+// #endif
 
-  #if ENABLED(PARK_HEAD_ON_PAUSE)
+// #if ENABLED(PARK_HEAD_ON_PAUSE)
 
-    M125();
+//   M125();
 
-  #else
+// #else
 
-    // Set initial pause flag to prevent more commands from landing in the queue while we try to pause
+//   // Set initial pause flag to prevent more commands from landing in the queue while we try to pause
 
+// #if ENABLED(POWER_LOSS_RECOVERY)
+//   if (recovery.enabled)
+//     recovery.save(true);
+// #endif
 
-    #if ENABLED(POWER_LOSS_RECOVERY)
-      if (recovery.enabled) recovery.save(true);
-    #endif
+//   print_job_timer.pause();
+//   // ui.reset_status();
 
-    print_job_timer.pause();
-    // ui.reset_status();
+// #if ENABLED(HOST_ACTION_COMMANDS)
+// #if ENABLED(HOST_PROMPT_SUPPORT)
+//   host_prompt_open(PROMPT_PAUSE_RESUME, PSTR("Pause SD"), PSTR("Resume"));
+// #endif
+// #ifdef ACTION_ON_PAUSE
+//   host_action_pause();
+// #endif
+// #endif
 
-    #if ENABLED(HOST_ACTION_COMMANDS)
-      #if ENABLED(HOST_PROMPT_SUPPORT)
-        host_prompt_open(PROMPT_PAUSE_RESUME, PSTR("Pause SD"), PSTR("Resume"));
-      #endif
-      #ifdef ACTION_ON_PAUSE
-        host_action_pause();
-      #endif
-    #endif
+// #endif
 
-  #endif
-
-	wt_machineStatus = WS_PAUSE;
-  
+//   // perron
+//   wt_machineStatus = WS_PAUSE;
+//   wtvar_led_effect = WLE_BREATH_BLUE;
 }
 
 #endif // SDSUPPORT

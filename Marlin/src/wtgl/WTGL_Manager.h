@@ -58,7 +58,7 @@ public:
 	void ResetScreen(void);
 
 	void GotoMain(void);
-	void GotoFilamentMenu(void) { GotoScreen(screenFilament); }
+	void GotoFilamentMenu(void) { screenFilament->SetParent(screenCurrent);  GotoScreen(screenFilament); }
 	void GotoBootMenu(void) { GotoScreen(screenBoot); }
 	void GotoControlMenu(void) { GotoScreen(screenControl);}
 	void GotoPrepareMenu(void) { GotoScreen(screenPrepare);}
@@ -97,6 +97,7 @@ public:
     void ShowTemperature(void);
 
     void PayloadProcess(uint16_t addr, uint8_t *data, uint8_t data_length);
+	void SendBusy(uint8_t busy);
 
 	bool busy = false;
 

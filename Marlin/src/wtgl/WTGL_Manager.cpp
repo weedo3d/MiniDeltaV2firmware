@@ -51,6 +51,7 @@ void WTGL_Manager::Update()
 		screenCurrent->holdontime = nowtime;
 		screenCurrent->Update();
 		gserial.SendByte(REG_PRINTER_STATE,  (uint8_t)wt_machineStatus);
+		gserial.SendByte(REG_OCTOPRINT_STATE,  (uint8_t)wt_onlineprinting);
 	}
 }
 
@@ -322,4 +323,9 @@ void WTGL_Manager::PayloadProcess(uint16_t addr, uint8_t *data, uint8_t data_len
 	{
 		screenCurrent->KeyProcess(addr, data, data_length);
 	}
+}
+
+void WTGL_Manager::SendBusy(uint8_t busy)
+{
+	gserial.SendByte(REG_BUSY, busy);
 }

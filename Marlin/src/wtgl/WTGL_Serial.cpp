@@ -99,7 +99,7 @@ void WTGL_Serial::Process()
 void WTGL_Serial::LoadScreen(uint8_t screenID)
 {
 	SendByte(REG_SCREEN_ID, screenID);
-    serial_echopair_PGM(PSTR("Load screen "), screenID);
+    // serial_echopair_PGM(PSTR("Load screen "), screenID);
     SERIAL_EOL();
 }
 

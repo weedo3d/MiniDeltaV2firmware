@@ -755,6 +755,7 @@ void setup() {
 
   recovery.enable(wtvar_enablepowerloss);
 
+  queue.enqueue_one_now("M203 Z300");
   wtvar_skipTest = 0;
   if (wtvar_gohome == 1)
   {

@@ -46,6 +46,8 @@ void WTGL_Screen_Main::KeyProcess(uint16_t addr, uint8_t *data, uint8_t data_len
     else if (addr == VAR_PREVIEW_FILEINDEX && data_length == 2)
     {
         card.selectFileByIndex(str2uint16(data));
+        gcodeinfo.parse(card.filename);
+        card.selectFileByIndex(str2uint16(data));
         card.openAndPrintFile(card.filename);
     }
     else if (addr == VAR_MAIN_INFO)

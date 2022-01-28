@@ -32,7 +32,7 @@ WT_STATUS wt_machineStatus = WS_IDLE;
 
 WT_MAIN_ACTION wt_mainloop_action = WT_MAIN_ACTION::WMA_IDLE;
 
-uint8_t wt_onlineprinting = SPARK_LOST;		// 0 = not printing, 1 = paused, 2 = printing, 3 = lost
+uint8_t wt_onlineprinting = OCTOPRINT_LOST;		// 0 = not printing, 1 = paused, 2 = printing, 3 = lost
 
 char parsedString[30];
 
@@ -121,7 +121,8 @@ void wt_sdcard_resume()
 
 void wt_spark_begin()
 {
-	wt_onlineprinting = SPARK_PRINTING;
+	wt_onlineprinting = OCTOPRINT_PRINTING;
+	gserial.SendByte(REG_OCTOPRINT_STATE,  (uint8_t)wt_onlineprinting);
 	print_job_timer.start();
 
 	#ifdef WTGL_LCD
@@ -134,7 +135,7 @@ void wt_spark_begin()
 void wt_spark_end()
 {
 	wt_machineStatus = WS_FINISH;
-	wt_onlineprinting = SPARK_IDLE;
+	wt_onlineprinting = OCTOPRINT_IDLE;
 	print_job_timer.stop();
 }
 
@@ -148,7 +149,7 @@ void wt_spark_pause()
 	print_job_timer.pause();
 
 	wt_machineStatus = WS_PAUSE;
-	wt_onlineprinting = SPARK_PAUSED;
+	wt_onlineprinting = OCTOPRINT_PAUSED;
 
 	#ifdef WTGL_LCD
 	wtgl.GotoPrintingMenu();
@@ -165,7 +166,7 @@ void wt_spark_resume()
 	planner.synchronize();
 
 	wt_machineStatus = WS_PRINTING;
-	wt_onlineprinting = SPARK_PRINTING;
+	wt_onlineprinting = OCTOPRINT_PRINTING;
 
 	#ifdef WTGL_LCD
 	wtgl.GotoPrintingMenu();
@@ -378,11 +379,11 @@ void WTCMD_Process()
 		break;
 
 	case 6:		
-		wt_onlineprinting = SPARK_IDLE;
+		wt_onlineprinting = OCTOPRINT_IDLE;
 		break;
 
 	case 7:		
-		wt_onlineprinting = SPARK_LOST;
+		wt_onlineprinting = OCTOPRINT_LOST;
 		break;
 
 	case 201:	

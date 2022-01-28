@@ -109,6 +109,7 @@ void WTGL_Screen_Filament::Update()
 	case FSSE_COMPLETE:
 		filaopsts = FSSE_CHOICETYPE;
 		queue.enqueue_now_P(PSTR("M104 S0"));
+		queue.enqueue_now_P(PSTR("M18"));
 		Goback();
 		break;
 	}
@@ -139,6 +140,7 @@ void WTGL_Screen_Filament::KeyProcess(uint16_t addr, uint8_t *data, uint8_t data
         filaopsts = FSSE_COMPLETE;
         queue.enqueue_now_P(PSTR("M104 S0"));
         queue.enqueue_now_P(PSTR("M410"));
+		queue.enqueue_now_P(PSTR("M18"));
         Goback();
     }
 }

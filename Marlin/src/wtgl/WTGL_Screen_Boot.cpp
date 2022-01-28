@@ -17,7 +17,7 @@ extern uint8_t wtvar_skipTest;
 
 void WTGL_Screen_Boot::Init()
 {
-	SERIAL_ECHOLNPGM("load screen boot");
+	// SERIAL_ECHOLNPGM("load screen boot");
 	
 	holdontime = getcurrenttime();
 
@@ -79,6 +79,7 @@ void WTGL_Screen_Boot::KeyProcess(uint16_t addr, uint8_t *data, uint8_t data_len
         else
             gserial.SendInt16(REG_BED_CURRENT, 0);
 
+		gserial.SendString(REG_DEVICE_VERSION, SHORT_BUILD_VERSION);
         wtgl.GotoMain();
 	}
 }

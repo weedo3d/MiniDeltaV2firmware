@@ -7,10 +7,10 @@
 
 #include "stdint.h"
 
-#define SPARK_IDLE		0
-#define SPARK_PAUSED	1
-#define SPARK_PRINTING	2
-#define SPARK_LOST		3
+#define OCTOPRINT_IDLE		0
+#define OCTOPRINT_PAUSED	1
+#define OCTOPRINT_PRINTING	2
+#define OCTOPRINT_LOST		3
 
 #define HOST_WIIBUILDER	0
 #define HOST_SPARK		1

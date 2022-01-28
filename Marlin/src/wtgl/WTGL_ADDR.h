@@ -219,5 +219,8 @@
 #define REG_WIFI_SSID               0xFF53  
 #define REG_WIFI_PWD                0xFF54  
 #define REG_WIFI_JOIN               0xFF55 
+#define REG_OPTION_RUNOUT           0xFF56  
+#define REG_OPTION_AUTOPAUSE        0xFF57  
+#define REG_OCTOPRINT_STATE         0xFF58 
 
 #endif

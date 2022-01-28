@@ -34,7 +34,7 @@ void WTGL_Screen_ZOffset::Init()
 	queue.enqueue_one_now("G29");
 	queue.enqueue_one_now("G1 X0 Y0 Z10 F2000");
 	queue.enqueue_one_now("G1 Z0 F400");
-    gserial.SendByte(REG_BUSY, 1);
+    wtgl.SendBusy(1);
 
 	holdontime = getcurrenttime();
 	zState = ZOSE_BEGIN;
@@ -53,7 +53,7 @@ void WTGL_Screen_ZOffset::Update()
 	{
 		if (planner.has_blocks_queued() == false)
 		{
-			gserial.SendByte(REG_BUSY, 0);
+			wtgl.SendBusy(0);
 			zState = ZOSE_INPUT;
 			zoffset_beginZpos = current_position[Z_AXIS];
             ShowZOffset();
